@@ -18,9 +18,16 @@ jobs:
       run: |
         curl https://getsubstrate.io -sSf | bash -s -- --fast
         source ~/.cargo/env
-        rustup target add wasm32-unknown-unknown --toolchain stable
         rustup component add rust-src --toolchain nightly
-        cargo install canvas-node --git https://github.com/paritytech/canvas-node.git --force
-        cargo install cargo-contract --git https://github.com/paritytech/cargo-contract.git --branch v0.7.0-rc1 --force
+        rustup target add wasm32-unknown-unknown --toolchain stable
+        rustup install nightly-2020-10-06
+        rustup target add wasm32-unknown-unknown --toolchain nightly-2020-10-06
+        cargo +nightly-2020-10-06 install canvas-node --git https://github.com/paritytech/canvas-node.git --tag v0.1.0 --force
+        cargo install cargo-contract --git https://github.com/paritytech/cargo-contract.git --rev 6d4c18a --force
         cargo contract --help
+        cargo contract new flipper
+        cd flipper/
+        cargo +nightly test
+        cargo +nightly contract build
+        cargo +nightly contract generate-metadata
       shell: bash
