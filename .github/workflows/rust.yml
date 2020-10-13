@@ -13,7 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: rust
     steps:
-    - name: check env
+    - name: Install Substrate
       run: |
         curl https://getsubstrate.io -sSf | bash -s -- --fast
+        source ~/.cargo/env
+        rustup target add wasm32-unknown-unknown --toolchain stable
+        rustup component add rust-src --toolchain nightly
+        rustup toolchain install nightly-2020-06-01
+        rustup target add wasm32-unknown-unknown --toolchain nightly-2020-06-01
+
       shell: bash
