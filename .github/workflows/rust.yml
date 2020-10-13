@@ -15,5 +15,5 @@ jobs:
     steps:
     - name: check env
       run: |
-        rustup show
+        curl https://getsubstrate.io -sSf | bash -s -- --fast
       shell: bash
