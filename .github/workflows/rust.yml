@@ -26,15 +26,9 @@ jobs:
         cargo +nightly-2020-06-01 install node-cli --git https://github.com/paritytech/substrate.git --tag v2.0.0-rc4 --force --locked
         cargo install cargo-contract --vers 0.6.2 --force
         cargo contract --help
+      name: Play with Ink!
+      run: |
+        cargo contract new flipper
+        cd flipper/
+        cargo +nightly test
       shell: bash
-      
-  contract:
-    runs-on: ubuntu-latest
-    needs: substrate
-    steps:
-      - name: Play with Ink!
-        run: |
-          cargo contract new flipper
-          cd flipper/
-          cargo +nightly test
-        shell: bash
