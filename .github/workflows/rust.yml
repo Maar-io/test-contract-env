@@ -9,7 +9,8 @@ jobs:
     steps:
     - name: Set up a Rust toolchain
       uses: hecrj/setup-rust-action@v1.3.4
-  check:
+      
+  substrate:
     runs-on: ubuntu-latest
     needs: rust
     steps:
@@ -21,5 +22,19 @@ jobs:
         rustup component add rust-src --toolchain nightly
         rustup toolchain install nightly-2020-06-01
         rustup target add wasm32-unknown-unknown --toolchain nightly-2020-06-01
-
+        rustup show
+        cargo +nightly-2020-06-01 install node-cli --git https://github.com/paritytech/substrate.git --tag v2.0.0-rc4 --force --locked
+        cargo install cargo-contract --vers 0.6.2 --force
+        cargo contract --help
       shell: bash
+      
+  contract:
+    runs-on: ubuntu-latest
+    needs: substrate
+    steps:
+      - name: Play with Ink!
+        run: |
+          cargo contract new flipper
+          cd flipper/
+          cargo +nightly test
+        shell: bash
