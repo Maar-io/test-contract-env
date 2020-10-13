@@ -3,7 +3,7 @@ on: [push]
 name: Rust Build
 
 jobs:
-  check:
+  rust:
     name: Rust project
     runs-on: ubuntu-latest
     steps:
