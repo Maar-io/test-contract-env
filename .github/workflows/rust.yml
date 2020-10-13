@@ -20,15 +20,7 @@ jobs:
         source ~/.cargo/env
         rustup target add wasm32-unknown-unknown --toolchain stable
         rustup component add rust-src --toolchain nightly
-        rustup toolchain install nightly-2020-06-01
-        rustup target add wasm32-unknown-unknown --toolchain nightly-2020-06-01
-        rustup show
-        cargo +nightly-2020-06-01 install node-cli --git https://github.com/paritytech/substrate.git --tag v2.0.0-rc4 --force --locked
-        cargo install cargo-contract --vers 0.6.2 --force
+        cargo install canvas-node --git https://github.com/paritytech/canvas-node.git --force
+        cargo install cargo-contract --git https://github.com/paritytech/cargo-contract.git --branch v0.7.0-rc1 --force
         cargo contract --help
-        cargo contract new flipper
-        cd flipper/
-        cargo +nightly-2020-06-01 test
-        cargo +nightly-2020-06-01 contract build
-        cargo +nightly-2020-06-01 contract generate-metadata
       shell: bash
