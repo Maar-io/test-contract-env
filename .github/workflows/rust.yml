@@ -9,3 +9,11 @@ jobs:
     steps:
     - name: Set up a Rust toolchain
       uses: hecrj/setup-rust-action@v1.3.4
+  check:
+    runs-on: ubuntu-latest
+    needs: rust
+    steps:
+    - name: check env
+      run: |
+        rustup show
+      shell: bash
