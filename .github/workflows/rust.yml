@@ -9,6 +9,7 @@ jobs:
     steps:
     - name: Set up a Rust toolchain
       run: |
+        curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh
         brew update
         brew install openssl cmake llvm
         curl https://sh.rustup.rs -sSf | sh
@@ -16,7 +17,8 @@ jobs:
         rustup default stable
         rustup install nightly-2020-10-06-x86_64-apple-darwin
         rustup target add wasm32-unknown-unknown --toolchain nightly-2020-10-06-x86_64-apple-darwin
-
+      shell: bash
+     
   substrate:
     runs-on: macos-10.14
     needs: rust
