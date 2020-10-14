@@ -22,12 +22,21 @@ jobs:
         rustup target add wasm32-unknown-unknown --toolchain stable
         rustup install nightly-2020-10-06
         rustup target add wasm32-unknown-unknown --toolchain nightly-2020-10-06
+    - name: Install canvas-node
+      run: |
         cargo +nightly-2020-10-06 install canvas-node --git https://github.com/paritytech/canvas-node.git --tag v0.1.0 --force
+    - name: Install cargo-contract 
+      run: |
         cargo install cargo-contract --git https://github.com/paritytech/cargo-contract.git --rev 6d4c18a --force
         cargo contract --help
+    - name: Install flipper 
+      run: |
         cargo contract new flipper
         cd flipper/
-        cargo +nightly test
+    - name: Test flipper 
+      run: cargo +nightly test
+    - name: Build contract
+      run: |
         cargo +nightly contract build
         cargo +nightly contract generate-metadata
       shell: bash
