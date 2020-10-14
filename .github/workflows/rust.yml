@@ -5,7 +5,7 @@ name: Rust Build
 jobs:
   rust:
     name: Install Rust
-    runs-on: macos-10.14.2
+    runs-on: macos-10.14
     steps:
     - name: Set up a Rust toolchain
       run: |
@@ -18,7 +18,7 @@ jobs:
         rustup target add wasm32-unknown-unknown --toolchain nightly-2020-10-06-x86_64-apple-darwin
 
   substrate:
-    runs-on: macos-10.14.2
+    runs-on: macos-10.14
     needs: rust
     steps:
     - name: Install Node
