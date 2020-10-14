@@ -4,24 +4,26 @@ name: Rust Build
 
 jobs:
   rust:
-    name: Rust project
+    name: Install Rust
     runs-on: ubuntu-latest
     steps:
     - name: Set up a Rust toolchain
-      uses: hecrj/setup-rust-action@v1.3.4
-      
+      run: |
+        brew update
+        brew install openssl cmake llvm
+        curl https://sh.rustup.rs -sSf | sh
+        source ~/.cargo/env
+        rustup default stable
+        rustup install nightly-2020-10-06-x86_64-apple-darwin
+        rustup target add wasm32-unknown-unknown --toolchain nightly-2020-10-06-x86_64-apple-darwin
+
   substrate:
     runs-on: ubuntu-latest
     needs: rust
     steps:
-    - name: Install Substrate
+    - name: Install Node
       run: |
-        curl https://getsubstrate.io -sSf | bash -s -- --fast
         source ~/.cargo/env
-        rustup component add rust-src --toolchain nightly
-        rustup target add wasm32-unknown-unknown --toolchain stable
-        rustup install nightly-2020-10-06
-        rustup target add wasm32-unknown-unknown --toolchain nightly-2020-10-06
     - name: Install canvas-node
       run: |
         cargo +nightly-2020-10-06 install canvas-node --git https://github.com/paritytech/canvas-node.git --tag v0.1.0 --force
