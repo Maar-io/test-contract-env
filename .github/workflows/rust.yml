@@ -30,13 +30,16 @@ jobs:
         rustup component add rust-src
         cargo install cargo-contract --git https://github.com/paritytech/cargo-contract.git --tag v0.7.0 --force
         cargo contract --help
+        rustup show
     - name: Install flipper 
       run: |
         cargo contract new flipper
         cd flipper/
         pwd
     - name: Test flipper 
-      run: cargo +nightly-2020-06-01 test
+      run: |
+        rustup install nightly-2020-06-01
+        cargo +nightly-2020-06-01 test
     - name: Build contract
       run: |
         cargo +nightly contract build
