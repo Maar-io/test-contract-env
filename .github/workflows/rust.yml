@@ -27,7 +27,7 @@ jobs:
         cargo +nightly-2020-10-06 install canvas-node --git https://github.com/paritytech/canvas-node.git --tag v0.1.0 --force
     - name: Install cargo-contract 
       run: |
-        cargo install cargo-contract --git https://github.com/paritytech/cargo-contract.git --rev 6d4c18a --force
+        cargo install cargo-contract --git https://github.com/paritytech/cargo-contract.git --tag v0.7.0 --force
         cargo contract --help
     - name: Install flipper 
       run: |
