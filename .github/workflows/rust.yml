@@ -9,9 +9,7 @@ jobs:
     steps:
     - name: Set up a Rust toolchain
       run: |
-        curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh
         brew update
-        brew install openssl cmake llvm
         curl https://sh.rustup.rs -sSf | sh
         source ~/.cargo/env
         rustup default stable
