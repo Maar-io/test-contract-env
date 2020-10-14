@@ -34,8 +34,9 @@ jobs:
       run: |
         cargo contract new flipper
         cd flipper/
+        pwd
     - name: Test flipper 
-      run: cargo +nightly test
+      run: cargo +nightly-2020-06-01 test
     - name: Build contract
       run: |
         cargo +nightly contract build
